@@ -16,13 +16,13 @@ const contactButtons = [
   },
   {
     label: "LinkedIn",
-    value: "linkedin.com/in/jayvinparmar",
+    value: "linkedin.com/in/jayvin-parmar-j21",
     href: profile.linkedin,
     icon: FaLinkedin,
   },
   {
     label: "GitHub",
-    value: "github.com/jayvinparmar",
+    value: "github.com/Jayvin21",
     href: profile.github,
     icon: FaGithub,
   },

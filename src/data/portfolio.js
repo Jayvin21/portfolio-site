@@ -52,8 +52,8 @@ export const profile = {
   description:
     "I build full-stack apps, AI workflows, RAG systems, automations, and dashboards that make complex work easier to understand, use, and scale.",
   email: "jayvin.parmar@gmail.com",
-  linkedin: "https://linkedin.com/in/jayvinparmar",
-  github: "https://github.com/jayvinparmar",
+  linkedin: "https://www.linkedin.com/in/jayvin-parmar-j21/",
+  github: "https://github.com/Jayvin21",
 };
 
 export const techRowOne = [
@@ -118,7 +118,7 @@ export const projects = [
       "PDF Reports"
     ],
     demo: "https://youtu.be/7ILILgUMo-Q",
-    github: "https://github.com/Jayvin21/AuditPal",
+    github: "https://github.com/Jayvin21AuditPal",
     live: "#",
     visual: "audit",
     status: "Star Project",
@@ -141,7 +141,7 @@ export const projects = [
       "Automation"
     ],
     demo: "https://youtu.be/H-amSXnkhlQ",
-    github: "https://github.com/Jayvin21/AskSheets",
+    github: "https://github.com/Jayvin21AskSheets",
     live: "#",
     visual: "ai-query",
     status: "MVP Complete",
@@ -171,7 +171,7 @@ export const projects = [
       "Dashboards"
     ],
     demo: "https://youtu.be/D3jKEjYy0B4",
-    github: "https://github.com/Jayvin21/HR-Flow-Agent",
+    github: "https://github.com/Jayvin21HR-Flow-Agent",
     live: "#",
     visual: "dashboard",
     status: "MVP Complete",

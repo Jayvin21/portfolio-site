@@ -39,8 +39,8 @@ export const profile = {
   description:
     "I build full-stack apps, AI workflows, RAG systems, automations, and dashboards that make complex work easier to understand, use, and scale.",
   email: "jayvin.parmar@gmail.com",
-  linkedin: "https://linkedin.com/in/jayvinparmar",
-  github: "https://github.com/jayvinparmar",
+  linkedin: "https://www.linkedin.com/in/jayvin-parmar-j21/",
+  github: "https://github.com/Jayvin21",
 };
 
 export const techRowOne = [
@@ -92,7 +92,7 @@ export const projects = [
       "Workspace-based CSV analysis platform where users upload datasets, preview tables, and ask natural-language questions to generate summaries, charts, and business insights.",
     tech: ["React", "FastAPI", "Python", "Pandas", "LLMs", "Data Viz"],
     demo: "#",
-    github: "https://github.com/Jayvin21/AskSheets",
+    github: "https://github.com/Jayvin21AskSheets",
     live: "#",
     visual: "ai-query",
     status: "MVP Build",

@@ -22,12 +22,12 @@ function Contact() {
 
           <a href={profile.linkedin} target="_blank" rel="noreferrer">
             <span>LinkedIn</span>
-            linkedin.com/in/jayvinparmar
+            linkedin.com/in/jayvin-parmar-j21
           </a>
 
           <a href={profile.github} target="_blank" rel="noreferrer">
             <span>GitHub</span>
-            github.com/jayvinparmar
+            github.com/Jayvin21
           </a>
         </div>
       </div>

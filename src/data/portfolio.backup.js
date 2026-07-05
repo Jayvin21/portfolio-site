@@ -39,8 +39,8 @@ export const profile = {
   description:
     "I build full-stack apps, AI workflows, RAG systems, automations, and dashboards that make complex work easier to understand, use, and scale.",
   email: "jayvin.parmar@gmail.com",
-  linkedin: "https://linkedin.com/in/jayvinparmar",
-  github: "https://github.com/jayvinparmar",
+  linkedin: "https://www.linkedin.com/in/jayvin-parmar-j21/",
+  github: "https://github.com/Jayvin21",
 };
 
 export const techRowOne = [
