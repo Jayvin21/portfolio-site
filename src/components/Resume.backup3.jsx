@@ -22,7 +22,7 @@ function Resume() {
         </div>
 
         <div className="resume-actions">
-          <a className="resume-download" href="/Jayvin_Parmar_Resume.pdf" download>
+          <a className="resume-download" href="/Jayvin-Resume-26.pdf" download>
             <FaDownload />
             Download Resume PDF
           </a>

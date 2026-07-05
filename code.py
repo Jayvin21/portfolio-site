@@ -1,161 +1,99 @@
 from pathlib import Path
+import shutil
+import re
 
 ROOT = Path(r"D:\Portfolio\portfolio-site")
 SRC = ROOT / "src"
+PUBLIC = ROOT / "public"
 
-# Find the portfolio data file automatically.
-candidates = list(SRC.rglob("*.js")) + list(SRC.rglob("*.jsx")) + list(SRC.rglob("*.ts")) + list(SRC.rglob("*.tsx"))
-portfolio_file = None
+RESUME_SOURCE = SRC / "assets" / "Jayvin-Resume-26.pdf"
+RESUME_PUBLIC = PUBLIC / "Jayvin-Resume-26.pdf"
+RESUME_URL = "/Jayvin-Resume-26.pdf"
 
-for file in candidates:
+if not RESUME_SOURCE.exists():
+    raise FileNotFoundError(f"Resume PDF not found: {RESUME_SOURCE}")
+
+PUBLIC.mkdir(exist_ok=True)
+shutil.copy2(RESUME_SOURCE, RESUME_PUBLIC)
+
+print(f"Copied resume to: {RESUME_PUBLIC}")
+
+target_exts = {".js", ".jsx", ".ts", ".tsx"}
+updated_files = []
+
+for file in SRC.rglob("*"):
+    if file.suffix.lower() not in target_exts:
+        continue
+
     text = file.read_text(encoding="utf-8", errors="ignore")
-    if "export const projects" in text and "AskSheets AI" in text and "HRFlow RAG AI" in text:
-        portfolio_file = file
-        break
+    original = text
+    lower = text.lower()
 
-if not portfolio_file:
-    raise FileNotFoundError("Could not find the portfolio data file containing export const projects.")
+    # Only touch files that likely contain resume/CV/download buttons.
+    if not any(keyword in lower for keyword in ["resume", "cv", "download"]):
+        continue
 
-auditpal_dir = SRC / "auditpal-ss"
-if not auditpal_dir.exists():
-    raise FileNotFoundError(f"AuditPal screenshots folder not found: {auditpal_dir}")
-
-image_files = sorted(
-    [
-        file for file in auditpal_dir.iterdir()
-        if file.suffix.lower() in {".png", ".jpg", ".jpeg", ".webp", ".svg"}
-    ]
-)
-
-if len(image_files) < 4:
-    raise ValueError(f"Expected at least 4 AuditPal images in {auditpal_dir}, found {len(image_files)}")
-
-auditpal_images = image_files[:4]
-
-text = portfolio_file.read_text(encoding="utf-8")
-
-# Remove old generated AuditPal imports if script is rerun.
-start_marker = "// AUDITPAL_SCREENSHOT_IMPORTS_START"
-end_marker = "// AUDITPAL_SCREENSHOT_IMPORTS_END"
-
-if start_marker in text and end_marker in text:
-    start = text.index(start_marker)
-    end = text.index(end_marker) + len(end_marker)
-    text = text[:start] + text[end:].lstrip()
-
-import_lines = [start_marker]
-for index, image in enumerate(auditpal_images, start=1):
-    import_lines.append(
-        f'import auditPal{index} from "../auditpal-ss/{image.name}";'
+    # Replace common placeholder links in resume-related files.
+    text = re.sub(
+        r'href=(["\'])#\1',
+        f'href="{RESUME_URL}"',
+        text
     )
-import_lines.append(end_marker)
-import_block = "\n".join(import_lines) + "\n\n"
 
-# Insert after HR imports if possible.
-insert_after = 'import hrCommunications from "../hr-flow-ss/07-communications-queue.png";'
-if insert_after in text:
-    text = text.replace(insert_after, insert_after + "\n\n" + import_block)
-else:
-    # Fallback: insert before react-icons import.
-    text = text.replace("import {\n  FaReact,", import_block + "import {\n  FaReact,")
+    text = re.sub(
+        r'href=\{(["\'])#\1\}',
+        f'href="{RESUME_URL}"',
+        text
+    )
 
-projects_start = text.index("export const projects = [")
-skillgroups_start = text.index("export const skillGroups", projects_start)
+    text = re.sub(
+        r'to=(["\'])#\1',
+        f'to="{RESUME_URL}"',
+        text
+    )
 
-new_projects = r'''export const projects = [
-  {
-    title: "AuditPal",
-    subtitle: "Agentic Audit Automation Platform",
-    description:
-      "Full-stack audit automation platform for Excel-heavy audit workflows. AuditPal lets users upload CSV/XLSX accounting exports, classify file types, map messy columns, extract normalized records, run 11 audit modules, review evidence-backed findings, use an agentic Audit Chat assistant, and export CSV/PDF reports.",
-    tech: [
-      "Next.js",
-      "TypeScript",
-      "FastAPI",
-      "Python",
-      "SQLAlchemy",
-      "SQLite",
-      "Pandas",
-      "OpenPyXL",
-      "Audit Automation",
-      "Agentic AI",
-      "Rule Engine",
-      "PDF Reports"
-    ],
-    demo: "https://youtu.be/7ILILgUMo-Q",
-    github: "https://github.com/Jayvin21/AuditPal",
-    live: "#",
-    visual: "audit",
-    status: "Star Project",
-    images: [auditPal1, auditPal2, auditPal3, auditPal4],
-  },
-  {
-    title: "AskSheets AI",
-    subtitle: "AI Spreadsheet Analyst",
-    description:
-      "Workspace-based data analysis platform where users upload CSV files, preview dataset health, ask natural-language questions, and generate summaries, tables, charts, downloadable outputs, and business insights from structured data.",
-    tech: [
-      "React",
-      "FastAPI",
-      "Python",
-      "Pandas",
-      "CSV Processing",
-      "LLMs",
-      "Data Analysis",
-      "Charts",
-      "Automation"
-    ],
-    demo: "https://youtu.be/H-amSXnkhlQ",
-    github: "https://github.com/Jayvin21/AskSheets",
-    live: "#",
-    visual: "ai-query",
-    status: "MVP Complete",
-    images: [
-      "/projects/asksheets/01-upload-preview.png",
-      "/projects/asksheets/02-csv-health.png",
-      "/projects/asksheets/03-ai-analyst.png",
-      "/projects/asksheets/04-chat-response-downloads.png",
-    ],
-  },
-  {
-    title: "HRFlow RAG AI",
-    subtitle: "AI HR Operations Platform",
-    description:
-      "Full-stack HR command center that converts resumes, job descriptions, attendance sheets, and HR issues into structured workflows. It includes document intelligence, resume parsing, JD matching, attendance analysis, communication queues, email and letter generators, interview packs, cases, and a dashboard command center.",
-    tech: [
-      "Next.js",
-      "React",
-      "FastAPI",
-      "Python",
-      "SQLAlchemy",
-      "SQLite",
-      "Pandas",
-      "Document Parsing",
-      "RAG",
-      "Automation",
-      "Dashboards"
-    ],
-    demo: "https://youtu.be/D3jKEjYy0B4",
-    github: "https://github.com/Jayvin21/HR-Flow-Agent",
-    live: "#",
-    visual: "dashboard",
-    status: "MVP Complete",
-    images: [hrDashboard, hrCandidates, hrCommunications],
-  },
-];
+    text = re.sub(
+        r'to=\{(["\'])#\1\}',
+        f'to="{RESUME_URL}"',
+        text
+    )
 
-'''
+    # Replace old resume paths if any exist.
+    text = re.sub(
+        r'(["\'])[^"\']*resume[^"\']*\.pdf\1',
+        f'"{RESUME_URL}"',
+        text,
+        flags=re.IGNORECASE
+    )
 
-text = text[:projects_start] + new_projects + text[skillgroups_start:]
+    text = re.sub(
+        r'(["\'])[^"\']*cv[^"\']*\.pdf\1',
+        f'"{RESUME_URL}"',
+        text,
+        flags=re.IGNORECASE
+    )
 
-portfolio_file.write_text(text, encoding="utf-8")
+    # Add download attribute to anchor tags that point to the resume, if missing.
+    text = re.sub(
+        r'(<a\b(?=[^>]*href="/Jayvin-Resume-26\.pdf")(?![^>]*\bdownload\b)[^>]*)(>)',
+        r'\1 download\2',
+        text
+    )
 
-print("Updated portfolio projects.")
-print(f"File: {portfolio_file}")
-print("AuditPal images used:")
-for image in auditpal_images:
-    print(f"- {image.name}")
-print("Project order:")
-print("1. AuditPal")
-print("2. AskSheets AI")
-print("3. HRFlow RAG AI")
+    # Add target/rel if the button opens as normal link and does not have download.
+    # We leave download links alone.
+
+    if text != original:
+        file.write_text(text, encoding="utf-8")
+        updated_files.append(file)
+
+print("\nUpdated files:")
+for file in updated_files:
+    print(f"- {file}")
+
+if not updated_files:
+    print("- No matching JSX/TSX files were changed.")
+    print("Resume was still copied to public. Manually set buttons to href='/Jayvin-Resume-26.pdf' if needed.")
+
+print("\nUse this link in React buttons:")
+print(RESUME_URL)

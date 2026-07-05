@@ -25,7 +25,7 @@ function Hero() {
   Explore Work <span>→</span>
 </a>
 
-<a href="/resume.pdf" className="btn btn-secondary" download>
+<a href="/Jayvin-Resume-26.pdf" className="btn btn-secondary" download>
   Download Resume
 </a>
         </div>

@@ -8,7 +8,7 @@ function Resume() {
           <p>Explore my experience, projects, and technical skills in detail.</p>
         </div>
 
-        <a href="/resume.pdf" className="btn btn-primary" download>
+        <a href="/Jayvin-Resume-26.pdf" className="btn btn-primary" download>
           Download Resume PDF
         </a>
       </div>
