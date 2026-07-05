@@ -2,6 +2,15 @@
 import hrCandidates from "../hr-flow-ss/03-candidates-parsed-profiles.png";
 import hrCommunications from "../hr-flow-ss/07-communications-queue.png";
 
+// AUDITPAL_SCREENSHOT_IMPORTS_START
+import auditPal1 from "../auditpal-ss/01_landing_page.png";
+import auditPal2 from "../auditpal-ss/05_column_mapping_module_fields.png";
+import auditPal3 from "../auditpal-ss/09_findings_review.png";
+import auditPal4 from "../auditpal-ss/13_reports_export.png";
+// AUDITPAL_SCREENSHOT_IMPORTS_END
+
+
+
 import {
   FaReact,
   FaNodeJs,
@@ -90,10 +99,36 @@ export const techRowTwo = [
 
 export const projects = [
   {
+    title: "AuditPal",
+    subtitle: "Agentic Audit Automation Platform",
+    description:
+      "Full-stack audit automation platform for Excel-heavy audit workflows. AuditPal lets users upload CSV/XLSX accounting exports, classify file types, map messy columns, extract normalized records, run 11 audit modules, review evidence-backed findings, use an agentic Audit Chat assistant, and export CSV/PDF reports.",
+    tech: [
+      "Next.js",
+      "TypeScript",
+      "FastAPI",
+      "Python",
+      "SQLAlchemy",
+      "SQLite",
+      "Pandas",
+      "OpenPyXL",
+      "Audit Automation",
+      "Agentic AI",
+      "Rule Engine",
+      "PDF Reports"
+    ],
+    demo: "https://youtu.be/7ILILgUMo-Q",
+    github: "https://github.com/Jayvin21/AuditPal",
+    live: "#",
+    visual: "audit",
+    status: "Star Project",
+    images: [auditPal1, auditPal2, auditPal3, auditPal4],
+  },
+  {
     title: "AskSheets AI",
     subtitle: "AI Spreadsheet Analyst",
     description:
-      "Workspace-based data analysis platform where users upload CSV files, preview dataset health, and ask natural-language questions to generate summaries, tables, charts, downloadable outputs, and business insights from structured data.",
+      "Workspace-based data analysis platform where users upload CSV files, preview dataset health, ask natural-language questions, and generate summaries, tables, charts, downloadable outputs, and business insights from structured data.",
     tech: [
       "React",
       "FastAPI",
@@ -102,9 +137,10 @@ export const projects = [
       "CSV Processing",
       "LLMs",
       "Data Analysis",
-      "Charts"
+      "Charts",
+      "Automation"
     ],
-    demo: "#",
+    demo: "https://youtu.be/H-amSXnkhlQ",
     github: "https://github.com/Jayvin21/AskSheets",
     live: "#",
     visual: "ai-query",
@@ -130,28 +166,16 @@ export const projects = [
       "SQLite",
       "Pandas",
       "Document Parsing",
+      "RAG",
       "Automation",
       "Dashboards"
     ],
-    demo: "#",
+    demo: "https://youtu.be/D3jKEjYy0B4",
     github: "https://github.com/Jayvin21/HR-Flow-Agent",
     live: "#",
     visual: "dashboard",
     status: "MVP Complete",
     images: [hrDashboard, hrCandidates, hrCommunications],
-  },
-  {
-    title: "Compliance AI",
-    subtitle: "Document Compliance Assistant",
-    description:
-      "AI-assisted compliance tool for uploading policy documents, extracting key clauses, and answering source-grounded questions with retrieval-based search.",
-    tech: ["React", "FastAPI", "RAG", "Embeddings", "Vector Search", "PDF Parsing"],
-    demo: "#",
-    github: "#",
-    live: "#",
-    visual: "compliance",
-    status: "MVP Build",
-    images: ["/projects/compliance/compliance-preview.svg"],
   },
 ];
 
