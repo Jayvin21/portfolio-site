@@ -118,7 +118,7 @@ export const projects = [
       "PDF Reports"
     ],
     demo: "https://youtu.be/7ILILgUMo-Q",
-    github: "https://github.com/Jayvin21AuditPal",
+    github: "https://github.com/Jayvin21/AuditPal",
     live: "#",
     visual: "audit",
     status: "Star Project",
@@ -141,7 +141,7 @@ export const projects = [
       "Automation"
     ],
     demo: "https://youtu.be/H-amSXnkhlQ",
-    github: "https://github.com/Jayvin21AskSheets",
+    github: "https://github.com/Jayvin21/AskSheets",
     live: "#",
     visual: "ai-query",
     status: "MVP Complete",
@@ -171,7 +171,7 @@ export const projects = [
       "Dashboards"
     ],
     demo: "https://youtu.be/D3jKEjYy0B4",
-    github: "https://github.com/Jayvin21HR-Flow-Agent",
+    github: "https://github.com/Jayvin21/HR-Flow-Agent",
     live: "#",
     visual: "dashboard",
     status: "MVP Complete",
